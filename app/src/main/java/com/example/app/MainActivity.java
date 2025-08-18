@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         textView=findViewById(R.id.tv);
-        textView.setText(Integer.toString(contador));
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
