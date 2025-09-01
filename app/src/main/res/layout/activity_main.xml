@@ -22,8 +22,8 @@
 
     <EditText
         android:id="@+id/edMax"
-        android:layout_width="190dp"
-        android:layout_height="58dp"
+        android:layout_width="195dp"
+        android:layout_height="56dp"
         android:ems="10"
         android:hint="100"
         android:inputType="text"

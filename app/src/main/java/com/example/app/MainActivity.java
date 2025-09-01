@@ -2,6 +2,9 @@ package com.example.app;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,61 +12,37 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("ciclo de vida","onCreate");
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+   Button button;
 
+   EditText editTextMin,editTextMax;
 
-    }
+   TextView tvResultado,tvIntroducao;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("ciclo de vida","onStart");
+   @Override
+    protected void onCreate(Bundle savedInstanceState){
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+       button=findViewById(R.id.button);
+       editTextMin=findViewById(R.id.edMin);
+       editTextMax=findViewById(R.id.edMax);
+       tvResultado=findViewById(R.id.tvResultado);
+       tvIntroducao=findViewById(R.id.tvIntroducao);
 
-    }
+       button.setOnClickListener(v -> {
+           Random random=new Random();
+           int min,max;
+           min=Integer.parseInt(editTextMin.getText().toString());
+           max=Integer.parseInt(editTextMax.getText().toString());
+           int delta=max-min;
+           int sorteado= random.nextInt(delta)+min;
+           tvResultado.setText(Integer.toString(sorteado));
+       });
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("ciclo de vida", "onRestart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("ciclo de vida","onResume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("ciclo_vida","onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("ciclo_vida","onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("ciclo_vida","onDestroy");
-    }
-
-
+   }
 
 
 }
