@@ -2,6 +2,8 @@ package com.example.app;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -11,11 +13,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-
-    String [] nomes =new String[]{"Ambrosio","Bilu","Babidi"};
-    ListView listView ;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,19 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        listView =findViewById(R.id.listinha);
+        ListView listView;
+
+        Button buttonSalvar;
+
+        EditText editText;
+
+        ArrayList<String>nomes;
+
+        listView =findViewById(R.id.listView);
+        buttonSalvar=findViewById(R.id.buttonSalvar);
+        editText=findViewById(R.id.edt);
+
+        nomes = new ArrayList<String>();
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -38,7 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 nomes);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener((parent, view, position, id) ->{
-            Toast.makeText(getApplicationContext(),nomes[position],Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),nomes.get(position),Toast.LENGTH_LONG).show();
+        });
+
+        buttonSalvar.setOnClickListener(v -> {
+            nomes.add(editText.getText().toString());
+            adapter.notifyDataSetChanged();
+        });
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            nomes.remove(position);
+            adapter.notifyDataSetChanged();
+            return true;
         });
 
 
