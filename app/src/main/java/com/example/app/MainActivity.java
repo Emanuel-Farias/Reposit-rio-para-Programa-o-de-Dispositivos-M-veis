@@ -17,52 +17,21 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    ListView listView;
+    PlanetaController planetaController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        ListView listView;
+        listView = findViewById(R.id.listview);
+        planetaController = new PlanetaController();
 
-        Button buttonSalvar;
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, planetaController.getNomePlanetas());
 
-        EditText editText;
-
-        ArrayList<String>nomes;
-
-        listView =findViewById(R.id.listView);
-        buttonSalvar=findViewById(R.id.buttonSalvar);
-        editText=findViewById(R.id.edt);
-
-        nomes = new ArrayList<String>();
-
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        ArrayAdapter<String> adapter= new ArrayAdapter<>(getApplicationContext(),
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
-                nomes);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener((parent, view, position, id) ->{
-            Toast.makeText(getApplicationContext(),nomes.get(position),Toast.LENGTH_LONG).show();
-        });
-
-        buttonSalvar.setOnClickListener(v -> {
-            nomes.add(editText.getText().toString());
-            adapter.notifyDataSetChanged();
-        });
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            nomes.remove(position);
-            adapter.notifyDataSetChanged();
-            return true;
-        });
-
-
     }
 }
