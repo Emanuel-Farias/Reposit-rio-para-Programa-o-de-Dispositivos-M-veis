@@ -1,6 +1,11 @@
 package com.example.app;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +14,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    SQLiteDatabase db;
+
+    Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +29,25 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        db = openOrCreateDatabase("app_databse",MODE_PRIVATE,null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS notas (id INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                " titulo VARCHAR,texto TEXT)");
+
+        b=findViewById(R.id.b);
+        b.setOnClickListener(v -> {
+            EditText editText = findViewById(R.id.editTextText);
+            String texto=editText.getText().toString();
+            ContentValues cv = new ContentValues();
+            cv.put("titulo","Nota de Exemplo");
+            cv.put("texto", "Este é o texto da nota de exemplo");
+            db.insert("notas", null,cv);
+            Toast.makeText("Nota salva com sucesso!", Toast.LENGTH_SHORT).show();
+
+        });
+
+
+
+
     }
 }
