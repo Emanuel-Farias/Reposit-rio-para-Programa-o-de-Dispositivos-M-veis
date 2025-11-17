@@ -1,6 +1,7 @@
 package com.example.app;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class ExibeItem extends AppCompatActivity {
+
+    TextView textViewTitulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +23,8 @@ public class ExibeItem extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        String titulo = getIntent().getStringExtra("titulo");
+        textViewTitulo= findViewById(R.id.textViewExibeItem);
+        textViewTitulo.setText(titulo);
     }
 }
