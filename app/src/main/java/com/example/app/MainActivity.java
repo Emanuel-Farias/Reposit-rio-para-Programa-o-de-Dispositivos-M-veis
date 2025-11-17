@@ -1,6 +1,7 @@
 package com.example.app;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -53,12 +54,20 @@ public class MainActivity extends AppCompatActivity {
 
             String texto=editText.getText().toString();
             ContentValues cv = new ContentValues();
-            cv.put("titulo","Nota de Exemplo");
+            cv.put("titulo",texto);
             cv.put("texto", "Este é o texto da nota de exemplo");
             db.insert("notas", null,cv);
             Toast.makeText(this,"Nota salva com sucesso!", Toast.LENGTH_SHORT).show();
+            carregarListagem();
+        });
+        listagem.setOnItemClickListener((parent,view,position,id)-> {
+            String titulo = (String) parent.getItemAtPosition(position);
+            Intent intent = new Intent(MainActivity.this, ExibeItem.class);
+            intent.putExtra("titulo",titulo);
+            startActivity(intent);
 
         });
+
 
     }
 
@@ -78,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     android.R.layout.simple_list_item_1,
                     titulos
             );
+            listagem.setAdapter(titulosAdapter);
         }
 
 
