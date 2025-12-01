@@ -9,55 +9,57 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0"
-        android:text="Calculadora IMC" />
+        android:layout_gravity="center"
+        android:text="Calculadora IMC"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvPeso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="Peso(Kg)" />
+        android:text="Peso(kg)" />
 
     <EditText
         android:id="@+id/edPeso"
-        android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:layout_weight="2"
+        android:layout_width="401dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_weight="0.1"
         android:ems="10"
-        android:inputType="numberDecimal" />
+        android:hint="X(kg)"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/tvAltura"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="altura" />
+        android:text="Altura(m)" />
 
     <EditText
         android:id="@+id/edAltura"
         android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
         android:ems="10"
-        android:inputType="numberDecimal" />
+        android:hint="Y(m)"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+        android:layout_weight="0.1"
+        android:text="Calcular" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
+        android:layout_weight="0.1"
         tools:srcCompat="@tools:sample/avatars" />
+
 
 </LinearLayout>
